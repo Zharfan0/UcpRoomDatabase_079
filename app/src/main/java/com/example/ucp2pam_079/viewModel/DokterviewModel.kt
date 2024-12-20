@@ -12,6 +12,10 @@ class DokterViewModel(private val repository: DokterRepository) : ViewModel() {
     private val _dokterList = MutableStateFlow<List<Dokter>>(emptyList())
     val dokterList: StateFlow<List<Dokter>> get() = _dokterList
 
+    init {
+        loadDokterList()
+    }
+
     fun insertDokter(dokter: Dokter) {
         viewModelScope.launch {
             repository.insertDokter(dokter)
@@ -25,4 +29,3 @@ class DokterViewModel(private val repository: DokterRepository) : ViewModel() {
         }
     }
 }
-

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Dokter")
 data class Dokter(
     @PrimaryKey(autoGenerate = true)
-    val id: String = 0,
+    val id: Int = 0,
     val nama: String,
     val spesialis: String,
     val klinik: String,

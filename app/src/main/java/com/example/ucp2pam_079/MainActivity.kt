@@ -7,8 +7,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -17,15 +22,28 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.ucp2pam_079.fragment.DokterScreen
+import com.example.ucp2pam_079.data.database.AppDatabase
+import com.example.ucp2pam_079.data.entity.Dokter
+import com.example.ucp2pam_079.data.entity.Jadwal
+import com.example.ucp2pam_079.data.repository.DokterRepository
+import com.example.ucp2pam_079.data.repository.DokterViewModelFactory
+import com.example.ucp2pam_079.data.repository.JadwalRepository
+import com.example.ucp2pam_079.data.repository.JadwalViewModelFactory
+import com.example.ucp2pam_079.fragment.DokterPage
+import com.example.ucp2pam_079.fragment.JadwalScreen
 import com.example.ucp2pam_079.ui.theme.UCP2PAM079Theme
 import com.example.ucp2pam_079.viewModel.DokterViewModel
 import com.example.ucp2pam_079.viewModel.JadwalViewModel
@@ -66,9 +84,18 @@ fun MainScreen() {
 
 @Composable
 fun NavigationComponent(navController: NavHostController) {
-    // Buat instance ViewModel
-    val dokterViewModel: DokterViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
-    val jadwalViewModel: JadwalViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val database = AppDatabase.getDatabase(context)
+
+    val dokterRepository = DokterRepository(database.dokterDao())
+    val jadwalRepository = JadwalRepository(database.jadwalDao())
+
+    val dokterViewModel: DokterViewModel = androidx.lifecycle.viewmodel.compose.viewModel(
+        factory = DokterViewModelFactory(dokterRepository)
+    )
+    val jadwalViewModel: JadwalViewModel = androidx.lifecycle.viewmodel.compose.viewModel(
+        factory = JadwalViewModelFactory(jadwalRepository)
+    )
 
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
@@ -78,10 +105,10 @@ fun NavigationComponent(navController: NavHostController) {
             )
         }
         composable("dokter") {
-            DokterScreen(viewModel = dokterViewModel) // Berikan ViewModel sebagai parameter
+            DokterPage(viewModel = dokterViewModel)
         }
         composable("jadwal") {
-            JadwalScreen(viewModel = jadwalViewModel) // Berikan ViewModel sebagai parameter
+            JadwalScreen(viewModel = jadwalViewModel)
         }
     }
 }
@@ -105,22 +132,6 @@ fun HomeScreen(onNavigateToDokter: () -> Unit, onNavigateToJadwal: () -> Unit) {
         }
     }
 }
-
-/*
-@Composable
-fun DokterScreen() {
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        Text(text = "Dokter Screen")
-    }
-}*/
-
-@Composable
-fun JadwalScreen(viewModel: JadwalViewModel) {
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        Text(text = "Jadwal Screen")
-    }
-}
-
 
 
 @Preview(showBackground = true)

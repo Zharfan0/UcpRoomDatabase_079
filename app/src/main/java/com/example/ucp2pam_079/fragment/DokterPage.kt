@@ -13,45 +13,61 @@ import com.example.ucp2pam_079.viewModel.DokterViewModel
 
 @Composable
 fun DokterPage(viewModel: DokterViewModel) {
-    var dokterList by remember { mutableStateOf(listOf<Dokter>()) }
     var nama by remember { mutableStateOf("") }
     var spesialis by remember { mutableStateOf("") }
+    var klinik by remember { mutableStateOf("") }
+    var noHp by remember { mutableStateOf("") }
+    var jamKerja by remember { mutableStateOf("") }
+
+    val dokterList by viewModel.dokterList.collectAsState(initial = emptyList())
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         Text("Dokter Page", style = MaterialTheme.typography.titleLarge)
 
-        BasicTextField(
-            value = nama,
-            onValueChange = { nama = it },
-            modifier = Modifier.fillMaxWidth().padding(8.dp),
-            decorationBox = { innerTextField ->
-                Box(modifier = Modifier.padding(8.dp)) {
-                    if (nama.isEmpty()) Text("Nama Dokter")
-                    innerTextField()
-                }
+        // Input fields
+        BasicTextField(value = nama, onValueChange = { nama = it }, modifier = Modifier.fillMaxWidth().padding(8.dp)) { innerTextField ->
+            Box(modifier = Modifier.padding(8.dp)) {
+                if (nama.isEmpty()) Text("Nama Dokter")
+                innerTextField()
             }
-        )
-
-        BasicTextField(
-            value = spesialis,
-            onValueChange = { spesialis = it },
-            modifier = Modifier.fillMaxWidth().padding(8.dp),
-            decorationBox = { innerTextField ->
-                Box(modifier = Modifier.padding(8.dp)) {
-                    if (spesialis.isEmpty()) Text("Spesialis")
-                    innerTextField()
-                }
+        }
+        BasicTextField(value = spesialis, onValueChange = { spesialis = it }, modifier = Modifier.fillMaxWidth().padding(8.dp)) { innerTextField ->
+            Box(modifier = Modifier.padding(8.dp)) {
+                if (spesialis.isEmpty()) Text("Spesialis")
+                innerTextField()
             }
-        )
+        }
+        BasicTextField(value = klinik, onValueChange = { klinik = it }, modifier = Modifier.fillMaxWidth().padding(8.dp)) { innerTextField ->
+            Box(modifier = Modifier.padding(8.dp)) {
+                if (klinik.isEmpty()) Text("Klinik")
+                innerTextField()
+            }
+        }
+        BasicTextField(value = noHp, onValueChange = { noHp = it }, modifier = Modifier.fillMaxWidth().padding(8.dp)) { innerTextField ->
+            Box(modifier = Modifier.padding(8.dp)) {
+                if (noHp.isEmpty()) Text("No HP")
+                innerTextField()
+            }
+        }
+        BasicTextField(value = jamKerja, onValueChange = { jamKerja = it }, modifier = Modifier.fillMaxWidth().padding(8.dp)) { innerTextField ->
+            Box(modifier = Modifier.padding(8.dp)) {
+                if (jamKerja.isEmpty()) Text("Jam Kerja")
+                innerTextField()
+            }
+        }
 
         Button(onClick = {
-            viewModel.insertDokter(Dokter(nama, spesialis))
+            viewModel.insertDokter(Dokter(0, nama, spesialis, klinik, noHp, jamKerja))
             nama = ""
             spesialis = ""
+            klinik = ""
+            noHp = ""
+            jamKerja = ""
         }, modifier = Modifier.padding(8.dp)) {
             Text("Add Dokter")
         }
 
+        // Display list of Dokter
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(dokterList) { dokter ->
                 Row(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
@@ -62,4 +78,3 @@ fun DokterPage(viewModel: DokterViewModel) {
         }
     }
 }
-
