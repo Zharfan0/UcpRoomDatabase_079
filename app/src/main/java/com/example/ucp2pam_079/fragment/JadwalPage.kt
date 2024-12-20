@@ -2,6 +2,7 @@ package com.example.ucp2pam_079.fragment
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -57,7 +58,7 @@ fun JadwalScreen(viewModel: JadwalViewModel) {
                         namaDokter = namaDokter.text,
                         namaPasien = namaPasien.text,
                         noHp = noHp.text,
-                        tanggal = tanggal.text,
+                        tanggalKonsultasi = tanggal.text,
                         status = status.text
                     )
                 )
