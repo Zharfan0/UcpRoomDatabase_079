@@ -4,25 +4,26 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ucp2pam_079.data.entity.Jadwal
 import com.example.ucp2pam_079.data.repository.JadwalRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class JadwalViewModel(private val repository: JadwalRepository) : ViewModel() {
+
+    private val _jadwalList = MutableStateFlow<List<Jadwal>>(emptyList())
+    val jadwalList: StateFlow<List<Jadwal>> get() = _jadwalList
+
     fun insertJadwal(jadwal: Jadwal) {
         viewModelScope.launch {
             repository.insertJadwal(jadwal)
+            loadJadwalList() // Refresh list after insertion
         }
     }
 
-    suspend fun getAllJadwal() = repository.getAllJadwal()
-    fun updateJadwal(jadwal: Jadwal) {
+    fun loadJadwalList() {
         viewModelScope.launch {
-            repository.updateJadwal(jadwal)
-        }
-    }
-
-    fun deleteJadwal(jadwal: Jadwal) {
-        viewModelScope.launch {
-            repository.deleteJadwal(jadwal)
+            _jadwalList.value = repository.getAllJadwal()
         }
     }
 }
+
