@@ -10,7 +10,7 @@ data class Dokter(
     val id: Int = 0,
     val nama: String,
     val spesialis: String,
-    val klinik: Double,
-    val noHp: Int,
+    val klinik: String,
+    val noHp: String,
     val jamKerja: String
 )
