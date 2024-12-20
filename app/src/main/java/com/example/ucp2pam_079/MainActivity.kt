@@ -25,7 +25,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.ucp2pam_079.fragment.DokterScreen
 import com.example.ucp2pam_079.ui.theme.UCP2PAM079Theme
+import com.example.ucp2pam_079.viewModel.DokterViewModel
+import com.example.ucp2pam_079.viewModel.JadwalViewModel
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +66,10 @@ fun MainScreen() {
 
 @Composable
 fun NavigationComponent(navController: NavHostController) {
+    // Buat instance ViewModel
+    val dokterViewModel: DokterViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    val jadwalViewModel: JadwalViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
             HomeScreen(
@@ -70,13 +78,15 @@ fun NavigationComponent(navController: NavHostController) {
             )
         }
         composable("dokter") {
-            DokterScreen() // Navigate to Dokter screen
+            DokterScreen(viewModel = dokterViewModel) // Berikan ViewModel sebagai parameter
         }
         composable("jadwal") {
-            JadwalScreen() // Navigate to Jadwal screen
+            JadwalScreen(viewModel = jadwalViewModel) // Berikan ViewModel sebagai parameter
         }
     }
 }
+
+
 
 @Composable
 fun HomeScreen(onNavigateToDokter: () -> Unit, onNavigateToJadwal: () -> Unit) {
@@ -96,19 +106,22 @@ fun HomeScreen(onNavigateToDokter: () -> Unit, onNavigateToJadwal: () -> Unit) {
     }
 }
 
+/*
 @Composable
 fun DokterScreen() {
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         Text(text = "Dokter Screen")
     }
-}
+}*/
 
 @Composable
-fun JadwalScreen() {
+fun JadwalScreen(viewModel: JadwalViewModel) {
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         Text(text = "Jadwal Screen")
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Composable
