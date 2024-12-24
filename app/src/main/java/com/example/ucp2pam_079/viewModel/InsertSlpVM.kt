@@ -5,10 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ucp2pam_079.data.entity.Supplier
 import com.example.ucp2pam_079.data.repository.RepoSup
 import kotlinx.coroutines.launch
 
-class InsertSupViewModel (private val repoSup: RepoSup) : ViewModel(
+
+class InsertSlpVM (private val repoSup: RepoSup) : ViewModel(
 ){
     var uiState by mutableStateOf(SupUIState())
 
@@ -64,13 +66,13 @@ class InsertSupViewModel (private val repoSup: RepoSup) : ViewModel(
 
 
 
-data class SupUIState(
+data class SlpUIState(
     val supplierEvent: SupplierEvent = SupplierEvent(),
     val isEntryValid: FormErrorState = FormErrorState(),
     val snackBarMessage: String? = null
 )
 
-data class FormErrorState(
+data class FormErorState(
     val namaSup: String? = null,
     val kontakSup: String? = null,
     val alamatSup: String? = null
@@ -82,13 +84,13 @@ data class FormErrorState(
 }
 
 
-fun SupplierEvent.toSupplierEntity(): Supplier = Supplier(
+fun SplEvent.toSupplierEntity(): Supplier = Supplier(
     namaSup = namaSup,
     kontakSup = kontakSup,
     alamatSup = alamatSup
 )
 
-data class SupplierEvent(
+data class SplEvent(
     val idSup: String = "",
     val namaSup: String = "",
     val kontakSup: String = "",
