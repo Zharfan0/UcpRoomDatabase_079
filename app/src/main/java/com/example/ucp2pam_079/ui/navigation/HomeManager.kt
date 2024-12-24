@@ -11,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.ucp2pam_079.ui.view.HomeView
+import com.example.ucp2pam_079.viewModel.HomeVM
 
 @Composable
 fun HomeManager(
@@ -22,7 +24,7 @@ fun HomeManager(
     ) {
         composable(
             route = DestinasiHome.route
-        ) { HomeAppView(
+        ) { HomeView(
             modifier = modifier,
             onNavigateAddSup ={ navController.navigate(DestinasiInsertSup.route) },
             onNavigateListSup = {navController.navigate(DestinasiListSup.route) },
