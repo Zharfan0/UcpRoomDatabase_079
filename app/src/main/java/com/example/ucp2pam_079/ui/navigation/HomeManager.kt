@@ -12,6 +12,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.ucp2pam_079.ui.view.HomeView
+import com.example.ucp2pam_079.ui.view.barang.DetailBrgView
+import com.example.ucp2pam_079.ui.view.barang.InsertBrgView
+import com.example.ucp2pam_079.ui.view.barang.ListBrgView
+import com.example.ucp2pam_079.ui.view.barang.UpdateBrgView
+import com.example.ucp2pam_079.ui.view.supplier.InsertSplView
+import com.example.ucp2pam_079.ui.view.supplier.ListSupView
 import com.example.ucp2pam_079.viewModel.HomeVM
 
 @Composable
@@ -35,7 +41,7 @@ fun HomeManager(
         composable(
             route = DestinasiInsertSup.route
         ) {
-            InsertSupView(
+            InsertSplView(
                 onBack = {
                     navController.popBackStack()
                 },
