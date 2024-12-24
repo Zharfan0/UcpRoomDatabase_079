@@ -1,15 +1,13 @@
 package com.example.ucp2pam_079.data.database
 
-import DokterDao
-import JadwalDao
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.ucp2pam_079.data.entity.Dokter
-import com.example.ucp2pam_079.data.entity.Jadwal
+import com.example.ucp2pam_079.data.entity.Barang
+import com.example.ucp2pam_079.data.entity.Supplier
 
-@Database(entities = [Dokter::class, Jadwal::class], version = 1, exportSchema = false)
+@Database(entities = [Barang::class, Supplier::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun dokterDao(): DokterDao
     abstract fun jadwalDao(): JadwalDao
