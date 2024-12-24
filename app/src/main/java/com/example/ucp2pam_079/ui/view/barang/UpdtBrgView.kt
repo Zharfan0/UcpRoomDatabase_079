@@ -13,6 +13,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2pam_079.ui.customWidget.TopAppBar
+import com.example.ucp2pam_079.viewModel.PenydiaVM
+import com.example.ucp2pam_079.viewModel.UpdateBrgViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -23,7 +27,7 @@ fun UpdateBrgView(
     onBack: () -> Unit,
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: UpdateBrgViewModel = viewModel(factory = PenyediaViewModel.Factory) // inisialisai view model
+    viewModel: UpdateBrgViewModel = viewModel(factory = PenydiaVM.Factory) // inisialisai view model
 ){
     val uiState = viewModel.updateUitate //ambil ui state dari view model
     val snackbarHostState = remember { SnackbarHostState() } // Snack State

@@ -20,6 +20,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -31,12 +32,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2pam_079.data.entity.Barang
+import com.example.ucp2pam_079.ui.customWidget.TopAppBar
+import com.example.ucp2pam_079.viewModel.DetailBrgUiState
 import com.example.ucp2pam_079.viewModel.DetailBrgViewModel
+import com.example.ucp2pam_079.viewModel.PenydiaVM
+import com.example.ucp2pam_079.viewModel.toBarangEntity
 
 @Composable
 fun DetailBrgView (
     modifier: Modifier = Modifier,
-    viewModel: DetailBrgViewModel = viewModel(factory = PenyediaViewModel.Factory),
+    viewModel: DetailBrgViewModel = viewModel(factory = PenydiaVM.Factory),
     onBack: () -> Unit = { },
     onEditClick: (Int) -> Unit = { },
     onDeleteClick: () -> Unit = {}
