@@ -1,11 +1,13 @@
 package com.example.ucp2pam_079.viewModel
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ucp2pam_079.data.repository.RepoSup
+import com.example.ucp2pam_079.data.entity.Supplier
 import kotlinx.coroutines.launch
-import java.util.function.Supplier
 
 class InsertSupViewModel (private val repoSup: RepoSup) : ViewModel(
 ){
