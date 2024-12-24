@@ -30,7 +30,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.ucp2pam_079.ui.customWidget.topHomeAppBar
+import com.example.ucp2pam_079.ui.customWidget.TopHomeAppBar
 
 @Composable
 fun HomeView(
@@ -43,7 +43,7 @@ fun HomeView(
     Scaffold (
         modifier = modifier,
         topBar ={
-            topHomeAppBar()
+            TopHomeAppBar()
         }
     ){ innerPadding ->
 
