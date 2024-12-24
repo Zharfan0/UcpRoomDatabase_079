@@ -77,15 +77,16 @@ data class FormErrorState(
 }
 
 data class SupplierEvent(
-    val idSup: String = "",
     val namaSup: String = "",
     val kontakSup: String = "",
     val alamatSup: String = ""
 )
 
+
+
 fun SupplierEvent.toSupplierEntity(): Supplier = Supplier(
-    idSup = idSup,
     namaSup = namaSup,
     kontakSup = kontakSup,
     alamatSup = alamatSup
 )
+
