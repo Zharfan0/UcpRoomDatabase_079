@@ -16,6 +16,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -27,6 +28,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2pam_079.ui.customWidget.TopAppBar
+import com.example.ucp2pam_079.viewModel.BarangEvent
+import com.example.ucp2pam_079.viewModel.BrgUIState
+import com.example.ucp2pam_079.viewModel.FormErrorBrgState
+import com.example.ucp2pam_079.viewModel.InsertBrgViewModel
+import com.example.ucp2pam_079.viewModel.ListSup
+import com.example.ucp2pam_079.viewModel.PenydiaVM
 import kotlinx.coroutines.launch
 
 @Composable
@@ -34,7 +43,7 @@ fun InsertBrgView(
     onNavigate: () -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: InsertBrgViewModel = viewModel(factory = PenyediaViewModel.Factory)
+    viewModel: InsertBrgViewModel = viewModel(factory = PenydiaVM.Factory)
 ){
     val uiState = viewModel.uiState
     val snackbarHostState = remember { SnackbarHostState() }
