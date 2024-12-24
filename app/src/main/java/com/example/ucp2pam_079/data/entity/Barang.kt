@@ -4,13 +4,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "Dokter")
+@Entity(tableName = "barang")
 data class Barang(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    val idBarang: Int = 0,
     val nama: String,
-    val spesialis: String,
-    val klinik: String,
-    val noHp: String,
-    val jamKerja: String
+    val deskripsi: String,
+    val harga: String,
+    val stok: Int,
+    val nama_sup: String,
 )
